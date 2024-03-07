@@ -6,7 +6,7 @@ Hello! 👋
 
 You are tasked with building an image grid using Angular. The site should display a grid of images, and allow the user to click on an image to view it in full screen. The user can also assign an image to a Task. Once an image is assigned to a task, it can be viewed and browsed through in a separate tab. The image should also no longer appear in the main image grid once it has been assigned to a task.
 
-Your application needs to only support a single task.
+Your application needs to only support a single task. Note that multiple images can be assigned to the task. 
 
 There should be in total 2 main routes: one for the images, and the other for images assigned to a task. All routing should be done within the Angular application.
 
