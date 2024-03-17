@@ -9,6 +9,13 @@ img {
   object-fit: cover;
 }
 
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
 .image-grid-container,
 .task-grid-container {
   margin: 30px;
@@ -16,6 +23,10 @@ img {
 
 .mat-grid-tile {
   cursor: pointer;
+}
+
+.mat-mdc-card-header {
+  padding: 16px !important;
 }
 
 .cdk-global-overlay-wrapper {

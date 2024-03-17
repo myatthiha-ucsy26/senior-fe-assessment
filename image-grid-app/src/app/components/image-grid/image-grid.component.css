@@ -21,13 +21,6 @@
   display: block;
 }
 
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-}
-
 .spinner {
   position: relative;
   left: 70px;
