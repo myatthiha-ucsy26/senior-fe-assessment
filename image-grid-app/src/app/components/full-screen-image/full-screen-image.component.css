@@ -1,0 +1,25 @@
+.dialog-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.centered-card {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.centered-card img {
+  height: auto;
+  margin: 40px;
+}
+
+.close-btn-card {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  z-index: 2;
+  cursor: pointer;
+}

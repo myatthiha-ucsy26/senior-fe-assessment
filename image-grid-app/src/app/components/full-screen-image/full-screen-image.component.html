@@ -1,0 +1,11 @@
+<div mat-dialog-content class="dialog-content">
+  <mat-card class="centered-card">
+    <img
+      mat-card-image
+      NgOptimizedImage
+      [src]="data.imageUrl"
+      alt="Full Screen Image"
+    />
+  </mat-card>
+  <span mat-button class="close-btn-card" (click)="closeDialog()">X</span>
+</div>

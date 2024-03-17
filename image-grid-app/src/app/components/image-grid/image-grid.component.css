@@ -1,0 +1,34 @@
+.img-action {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+}
+
+.image-grid-container img {
+  display: none;
+}
+
+.image-grid-container img.loaded {
+  display: block;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.spinner {
+  position: relative;
+  left: 70px;
+}

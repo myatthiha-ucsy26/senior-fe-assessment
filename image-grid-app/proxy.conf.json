@@ -1,0 +1,7 @@
+{
+  "/sfe-images/**": {
+    "target": "https://vst-test-images.s3.ap-southeast-1.amazonaws.com",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

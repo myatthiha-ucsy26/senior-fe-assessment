@@ -1,0 +1,14 @@
+<mat-toolbar class="toolbar">
+  <div (click)="navigateToImages()" class="logo">
+    <mat-icon>work_outline</mat-icon>
+    <span class="logo-text">Senior Frontend Assement</span>
+  </div>
+  <div>
+    <button mat-button [routerLink]="['/images']" class="nav-bar-btn">
+      Image
+    </button>
+    <button mat-button [routerLink]="['/tasks']" class="nav-bar-btn">
+      Task
+    </button>
+  </div>
+</mat-toolbar>

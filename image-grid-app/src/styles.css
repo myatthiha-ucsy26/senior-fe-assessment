@@ -1,0 +1,29 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  object-fit: cover;
+}
+
+.image-grid-container,
+.task-grid-container {
+  margin: 30px;
+}
+
+.mat-grid-tile {
+  cursor: pointer;
+}
+
+.cdk-global-overlay-wrapper {
+  justify-content: center !important;
+}
+
+.cdk-overlay-container .cdk-global-overlay-wrapper .center-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
