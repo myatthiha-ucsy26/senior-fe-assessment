@@ -10,8 +10,15 @@
 .delete-btn {
   color: #08428a;
 }
+
 .no-task {
   height: 70vh;
   display: grid;
   place-items: center;
+}
+
+.task-img-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

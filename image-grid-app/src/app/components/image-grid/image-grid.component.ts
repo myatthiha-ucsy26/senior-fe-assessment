@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
-import { MatDialog } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+
 import { Subscription } from 'rxjs';
 
 import { ImageService } from '../../service/image.service';
@@ -24,24 +28,26 @@ interface Image {
   standalone: true,
   imports: [
     CommonModule,
-    NgOptimizedImage,
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
     MatProgressSpinnerModule,
+    MatIconModule,
+    NgOptimizedImage,
   ],
   templateUrl: './image-grid.component.html',
   styleUrls: ['./image-grid.component.css'],
 })
 export class ImageGridComponent implements OnInit {
   assignedImages: Image[] = [];
-  currentPage = 0;
+  currentPage: number = 0;
   cols: number | undefined;
   images: Image[] = [];
   imageLoadingStates: boolean[] = [];
 
   taskImages: string[] = [];
-  pageSize = 8;
+  totalLength: number = 0;
+  pageSize: number = 8;
 
   private subscription: Subscription | undefined;
 
@@ -49,7 +55,8 @@ export class ImageGridComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog,
     private imageService: ImageService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private snackBar: MatSnackBar
   ) {
     const breakpoints = Object.values(Breakpoints);
     // Subscribe to the breakpoint changes
@@ -72,10 +79,14 @@ export class ImageGridComponent implements OnInit {
     });
 
     this.imageService.getImages().subscribe(async (data) => {
-      const parsedUrls = data.split('\n');
+      const parsedUrls = data
+        .split('\n')
+        .filter((url) => url.trim().length > 0);
       this.assignedImages = this.taskService.getAssignedImages();
 
       this.images = parsedUrls.map((url) => ({ url }));
+      this.totalLength = this.images.length - this.assignedImages.length;
+
       this.imageLoadingStates = new Array(this.images.length).fill(true);
 
       if (this.assignedImages.length > 0) {
@@ -125,14 +136,18 @@ export class ImageGridComponent implements OnInit {
     const imageIndex = this.images.indexOf(image);
     setTimeout(() => {
       this.imageLoadingStates[imageIndex] = false;
-    }, 1000); // Replace with a suitable delay or remove for instant class application
+    }, 1000);
   }
 
   assignToTask(image: Image): void {
     this.images = this.images.filter((img) => img !== image);
     this.assignedImages.push(image);
-    localStorage.setItem('assignImg', JSON.stringify(this.assignedImages));
-    window.open('/tasks', '_blank');
+    localStorage.setItem('assignImages', JSON.stringify(this.assignedImages));
+    this.totalLength--;
+    this.snackBar.open('Task is successfully assigned to user.', 'Close', {
+      horizontalPosition: 'end',
+      duration: 3000,
+    });
   }
 
   viewImage(imageUrl: string): void {
@@ -140,18 +155,21 @@ export class ImageGridComponent implements OnInit {
       console.error('MatDialog service not injected');
       return;
     }
-    const screen = this.breakpointObserver.isMatched(Breakpoints.Large)
-      ? 'large'
-      : this.breakpointObserver.isMatched(Breakpoints.Small)
-      ? 'small'
-      : 'medium';
 
     this.dialog.open(FullScreenImageComponent, {
-      width: screen === 'large' ? '30%' : screen === 'medium' ? '50%' : '60%',
       height: 'auto',
       data: { imageUrl },
       restoreFocus: false,
     });
+  }
+
+  calculateStartIndex(): number {
+    return this.currentPage * this.pageSize + 1;
+  }
+
+  calculateEndIndex(): number {
+    const end = (this.currentPage + 1) * this.pageSize;
+    return end > this.images.length ? this.images.length : end;
   }
 
   ngOnDestroy() {

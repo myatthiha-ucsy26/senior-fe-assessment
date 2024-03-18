@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ImageService {
-  private imagesUrl = 'sfe-images/image_paths.txt';
+  private imagesUrl: string = 'sfe-images/image_paths.txt';
+  currentPage: number = 0;
+
 
   constructor(private http: HttpClient) {}
 

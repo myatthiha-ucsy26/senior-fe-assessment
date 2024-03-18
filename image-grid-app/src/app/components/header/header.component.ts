@@ -13,6 +13,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+  currentRoute: string = '';
+
   constructor(private router: Router) {}
 
   navigateToImages() {

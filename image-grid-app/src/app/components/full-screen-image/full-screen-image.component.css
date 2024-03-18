@@ -18,8 +18,12 @@
 
 .close-btn-card {
   position: absolute;
-  top: 5px;
-  right: 15px;
+  top: 10px;
+  right: 14px;
   z-index: 2;
   cursor: pointer;
+}
+
+.close-btn-card:hover {
+  background: #eee;
 }

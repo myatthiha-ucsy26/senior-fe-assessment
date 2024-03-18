@@ -1,10 +1,21 @@
 <mat-card class="image-grid-container">
+  <div class="paginator-container" *ngIf="getPaginatedImages().length > 0">
+    <div class="pagination-controls">
+      <button mat-icon-button (click)="prevPage()" [disabled]="isFirstPage()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <span class="page-info"
+        >{{ calculateStartIndex() }} - {{ calculateEndIndex() }} of
+        {{ totalLength }}</span
+      >
+      <button mat-icon-button (click)="nextPage()" [disabled]="isLastPage()">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+  </div>
   <mat-grid-list [cols]="cols">
     <mat-grid-tile *ngFor="let image of getPaginatedImages()">
-      <mat-card
-        [@imageFadeIn]="!imageLoadingStates[images.indexOf(image)]"
-        class="image-card"
-      >
+      <mat-card class="image-card">
         <mat-card-header>
           <div class="image-container">
             <img
@@ -18,14 +29,13 @@
               [ngClass]="{ loaded: !imageLoadingStates[images.indexOf(image)] }"
             />
             <mat-progress-spinner
-              class="spinner"
+              style="margin: 0 auto"
               diameter="30"
               *ngIf="imageLoadingStates[images.indexOf(image)]"
               mode="indeterminate"
             ></mat-progress-spinner>
           </div>
         </mat-card-header>
-        <mat-card-content> </mat-card-content>
         <mat-card-actions class="img-action">
           <button mat-button (click)="viewImage(image.url)">View</button>
           <button mat-button (click)="assignToTask(image)">
@@ -36,11 +46,3 @@
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card>
-<div class="pagination" *ngIf="getPaginatedImages().length > 0">
-  <button mat-raised-button (click)="prevPage()" [disabled]="isFirstPage()">
-    Previous
-  </button>
-  <button mat-raised-button (click)="nextPage()" [disabled]="isLastPage()">
-    Next
-  </button>
-</div>

@@ -14,11 +14,32 @@ img {
   justify-content: center;
   align-items: center;
   height: 200px;
+  position: relative;
 }
 
 .image-grid-container,
 .task-grid-container {
-  margin: 30px;
+  margin: 20px;
+}
+
+.paginator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+}
+
+.mat-icon {
+  font-size: 24px;
+}
+
+.page-info {
+  margin: 0 10px;
+  font-size: 16px;
 }
 
 .mat-grid-tile {
@@ -26,15 +47,30 @@ img {
 }
 
 .mat-mdc-card-header {
-  padding: 16px !important;
-}
-
-.cdk-global-overlay-wrapper {
-  justify-content: center !important;
+  display: block !important;
+  padding: 0 !important;
 }
 
 .cdk-overlay-container .cdk-global-overlay-wrapper .center-dialog {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.mat-mdc-dialog-container {
+  width: 50% !important;
+  margin: auto !important; /* Center horizontally */
+  max-width: calc(100vw - 20px) !important;
+}
+
+@media (min-width: 770px) and (max-width: 1200px) {
+  .mat-mdc-dialog-container {
+    width: 60% !important;
+  }
+}
+
+@media (max-width: 770px) {
+  .mat-mdc-dialog-container {
+    width: 100% !important;
+  }
 }

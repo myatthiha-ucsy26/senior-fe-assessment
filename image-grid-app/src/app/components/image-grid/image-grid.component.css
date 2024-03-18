@@ -3,16 +3,6 @@
   justify-content: center;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.pagination button {
-  margin: 0 5px;
-}
-
 .image-grid-container img {
   display: none;
 }
@@ -21,7 +11,7 @@
   display: block;
 }
 
-.spinner {
-  position: relative;
-  left: 70px;
+.mat-snack-bar-right {
+  direction: ltr;
+  justify-content: flex-end;
 }

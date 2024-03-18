@@ -11,12 +11,13 @@ export class TaskService {
   assignedImages: Image[] = [];
 
   constructor() {}
+
   assignImageToTask(image: Image): void {
     this.assignedImages.push(image);
   }
 
   getAssignedImages(): Image[] {
-    const storedImages = localStorage.getItem('assignImg');
+    const storedImages = localStorage.getItem('assignImages');
     if (storedImages) {
       return JSON.parse(storedImages);
     } else {
