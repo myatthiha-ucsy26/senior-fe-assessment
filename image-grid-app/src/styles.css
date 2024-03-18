@@ -44,7 +44,7 @@ img {
 
 .no-task,
 .no-image {
-  min-height: 70vh;
+  min-height: 60vh;
   display: grid;
   place-items: center;
 }

@@ -1,20 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
-import { TaskImagesComponent } from './task-images.component';
+import { GridViewComponent } from './grid-view.component';
 import { ImageService } from '../../service/image.service';
 
-describe('TaskImagesComponent', () => {
-  let component: TaskImagesComponent;
-  let fixture: ComponentFixture<TaskImagesComponent>;
+describe('GridViewComponent', () => {
+  let component: GridViewComponent;
+  let fixture: ComponentFixture<GridViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, TaskImagesComponent],
-      providers: [ImageService],
-    }).compileComponents();
+      imports: [HttpClientModule, GridViewComponent],
+      providers: [ImageService]
+    })
+    .compileComponents();
 
-    fixture = TestBed.createComponent(TaskImagesComponent);
+    fixture = TestBed.createComponent(GridViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

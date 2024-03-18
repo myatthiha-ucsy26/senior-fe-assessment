@@ -1,0 +1,9 @@
+<div class="pagination-controls">
+  <button mat-icon-button (click)="handlePrevPage()" [disabled]="isFirstPage()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <span class="page-info">{{ calculateStartIndex() }} - {{ calculateEndIndex() }} of {{ totalLength }}</span>
+  <button mat-icon-button (click)="handleNextPage()" [disabled]="isLastPage()">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+</div>

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ImageGridComponent } from './image-grid.component';
 
@@ -9,7 +10,7 @@ describe('ImageGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ImageGridComponent],
+      imports: [HttpClientTestingModule, HttpClientModule, ImageGridComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ImageGridComponent);

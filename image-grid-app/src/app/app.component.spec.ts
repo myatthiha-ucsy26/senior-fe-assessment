@@ -1,16 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ImageGridComponent } from './components/image-grid/image-grid.component';
+import { ImageService } from './service/image.service';
 
 describe('AppComponent', () => {
   const routes = [{ path: '', component: ImageGridComponent }];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterModule, AppComponent, RouterModule.forRoot(routes)],
+      imports: [
+        RouterModule,
+        HttpClientModule,
+        AppComponent,
+        RouterModule.forRoot(routes),
+      ],
+      providers: [ImageService],
     }).compileComponents();
   });
 

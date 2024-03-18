@@ -1,0 +1,32 @@
+.img-action {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mat-snack-bar-right {
+    direction: ltr;
+    justify-content: flex-end;
+  }
+
+  .delete-btn-container {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: end;
+    top: 10px;
+    right: 30px;
+  }
+
+  .delete-btn {
+    color: #08428a;
+  }
+
+  .image-card {
+      min-width: 200px;
+  }
+
+  .task-img-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
