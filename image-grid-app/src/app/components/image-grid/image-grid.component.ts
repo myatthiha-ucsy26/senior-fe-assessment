@@ -44,7 +44,6 @@ export class ImageGridComponent implements OnInit {
   cols: number | undefined;
   images: Image[] = [];
   imageLoadingStates: boolean[] = [];
-
   taskImages: string[] = [];
   totalLength: number = 0;
   pageSize: number = 8;

@@ -42,6 +42,13 @@ img {
   font-size: 16px;
 }
 
+.no-task,
+.no-image {
+  height: 70vh;
+  display: grid;
+  place-items: center;
+}
+
 .mat-grid-tile {
   cursor: pointer;
 }
