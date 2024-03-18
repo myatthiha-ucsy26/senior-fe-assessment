@@ -5,11 +5,14 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { TaskService } from '../../service/task.service';
-import { MatDialog } from '@angular/material/dialog';
+
 import { FullScreenImageComponent } from '../full-screen-image/full-screen-image.component';
 
 interface Image {
@@ -33,15 +36,16 @@ interface Image {
 })
 export class TaskImagesComponent implements OnInit {
   assignedImages: { url: string }[] = [];
-  cols: number | undefined;
-  currentPage = 0;
-  totalPages = 0;
+  cols!: number;
+  currentPage: number = 0;
   imageLoadingStates: boolean[] = [];
-  pageSize = 8;
+  totalPages: number = 0;
+  pageSize: number = 8;
   constructor(
     private breakpointObserver: BreakpointObserver,
     private taskService: TaskService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     const breakpoints = Object.values(Breakpoints);
 
@@ -71,6 +75,7 @@ export class TaskImagesComponent implements OnInit {
 
   getTasks() {
     this.assignedImages = this.taskService.getAssignedImages();
+    this.imageLoadingStates = new Array(this.assignedImages.length).fill(true);
     this.totalPages = this.assignedImages.length;
     return this.assignedImages;
   }
@@ -78,6 +83,10 @@ export class TaskImagesComponent implements OnInit {
   deleteAllTasks() {
     localStorage.removeItem('assignImages');
     this.getTasks();
+    this.snackBar.open('All tasks are successfully deleted.', 'Close', {
+      horizontalPosition: 'end',
+      duration: 3000,
+    });
   }
 
   viewImage(imageUrl: string): void {

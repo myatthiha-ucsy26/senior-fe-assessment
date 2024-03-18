@@ -11,6 +11,10 @@
   color: #08428a;
 }
 
+.image-card {
+    min-width: 200px;
+}
+
 .task-img-action {
   display: flex;
   justify-content: center;

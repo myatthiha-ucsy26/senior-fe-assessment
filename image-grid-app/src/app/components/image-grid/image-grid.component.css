@@ -3,14 +3,6 @@
   justify-content: center;
 }
 
-.image-grid-container img {
-  display: none;
-}
-
-.image-grid-container img.loaded {
-  display: block;
-}
-
 .mat-snack-bar-right {
   direction: ltr;
   justify-content: flex-end;

@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Subscription } from 'rxjs';
 
@@ -36,19 +36,20 @@ interface Image {
     NgOptimizedImage,
   ],
   templateUrl: './image-grid.component.html',
-  styleUrls: ['./image-grid.component.css'],
+  styleUrls: ['./image-grid.component.css']
 })
 export class ImageGridComponent implements OnInit {
   assignedImages: Image[] = [];
   currentPage: number = 0;
-  cols: number | undefined;
+  cols!: number;
   images: Image[] = [];
   imageLoadingStates: boolean[] = [];
   taskImages: string[] = [];
   totalLength: number = 0;
   pageSize: number = 8;
 
-  private subscription: Subscription | undefined;
+  private subscription!: Subscription;
+  private currentPageSubscription !: Subscription;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -101,7 +102,11 @@ export class ImageGridComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentPageSubscription = this.imageService.currentPage$.subscribe(page => {
+      this.currentPage = page;
+    });
+  }
 
   getPaginatedImages(): Image[] {
     const startIndex = this.currentPage * this.pageSize;
@@ -131,6 +136,19 @@ export class ImageGridComponent implements OnInit {
     return this.currentPage === 0;
   }
 
+  calculateStartIndex(): number {
+    return this.currentPage * this.pageSize + 1;
+  }
+
+  calculateEndIndex(): number {
+    const end = (this.currentPage + 1) * this.pageSize;
+    return end > this.images.length ? this.images.length : end;
+  }
+
+  navigateToImages() {
+    this.currentPage = 0;
+  }
+
   onImageLoaded(image: Image) {
     const imageIndex = this.images.indexOf(image);
     setTimeout(() => {
@@ -151,10 +169,8 @@ export class ImageGridComponent implements OnInit {
 
   viewImage(imageUrl: string): void {
     if (!this.dialog) {
-      console.error('MatDialog service not injected');
       return;
     }
-
     this.dialog.open(FullScreenImageComponent, {
       height: 'auto',
       data: { imageUrl },
@@ -162,18 +178,10 @@ export class ImageGridComponent implements OnInit {
     });
   }
 
-  calculateStartIndex(): number {
-    return this.currentPage * this.pageSize + 1;
-  }
-
-  calculateEndIndex(): number {
-    const end = (this.currentPage + 1) * this.pageSize;
-    return end > this.images.length ? this.images.length : end;
-  }
-
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+    this.currentPageSubscription.unsubscribe();
   }
 }

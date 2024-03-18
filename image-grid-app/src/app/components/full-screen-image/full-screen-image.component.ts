@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [MatButtonModule, MatCardModule, MatIconModule],
   templateUrl: './full-screen-image.component.html',
-  styleUrl: './full-screen-image.component.css',
+  styleUrl: './full-screen-image.component.css'
 })
 export class FullScreenImageComponent {
   constructor(

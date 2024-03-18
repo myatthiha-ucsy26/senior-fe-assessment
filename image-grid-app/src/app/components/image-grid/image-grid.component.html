@@ -40,8 +40,10 @@
           </div>
         </mat-card-header>
         <mat-card-actions class="img-action">
-          <button mat-button (click)="viewImage(image.url)">View</button>
-          <button mat-button (click)="assignToTask(image)">
+          <button mat-button (click)="viewImage(image.url)" [disabled]="imageLoadingStates[images.indexOf(image)]">
+            View
+          </button>
+          <button mat-button (click)="assignToTask(image)" [disabled]="imageLoadingStates[images.indexOf(image)]">
             Assign to Task
           </button>
         </mat-card-actions>
